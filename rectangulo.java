@@ -22,11 +22,11 @@ public class rectangulo{
 
   System.out.println("\t\tClase Rectangulo: ");
       rectangulo rec1 = new rectangulo();
-     System.out.println("Area enteros: "+rec1.area(11, 2));
-        System.out.println("Perimetro enteros: "+rec1.perimetro(11, 2));
+     System.out.println("Area enteros: "+rec1.area(8, 3));
+        System.out.println("Perimetro enteros: "+rec1.perimetro(13, 9));
 
         rectangulo rec2 = new rectangulo();
-        System.out.println("Area doubles: "+rec2.area(9.54, 8.13));
-        System.out.println("Perimetro doubles: "+rec2.perimetro(9.54, 8.13));
+        System.out.println("Area doubles: "+rec2.area(3.14, 6.13));
+        System.out.println("Perimetro doubles: "+rec2.perimetro(4.44, 3.33));
 }
 }
