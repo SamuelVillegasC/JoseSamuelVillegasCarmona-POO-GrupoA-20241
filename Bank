@@ -1,0 +1,21 @@
+class Bank:
+    def __init__(self):
+        self.accounts = []
+
+    def setAccounts(self, newAccount):
+        self.accounts.append(newAccount)
+
+    def AcclList(self):
+        for s, bankAccount in enumerate(self.accounts):
+            print("Cuenta: ", s+1)
+            print("NoCuenta: ", bankAccount.getNoCuenta())
+            print("Tipo de Cuenta: ", bankAccount.getAccType())
+            print("Saldo: ", bankAccount.getSaldo())
+        print("----------")
+
+    def printIndexList(self, i):
+        bankAccount = self.accounts[i-1]
+        print("Cuenta: ", i)
+        print("NoCuenta: ", bankAccount.getNoCuenta())
+        print("Tipo de Cuenta: ", bankAccount.getAccType())
+        print("Saldo: ", bankAccount.getSaldo())
