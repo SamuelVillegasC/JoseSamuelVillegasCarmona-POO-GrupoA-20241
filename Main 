@@ -1,0 +1,121 @@
+class Employee:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.accounts = []
+
+    def add_account(self, account_number, balance, account_type):
+        account = Account(account_number, balance, account_type)
+        self.accounts.append(account)
+
+    def get_account_list(self):
+        for account in self.accounts:
+            print(f"Account Number: {account.account_number}")
+            print(f"Balance: {account.balance}")
+            print(f"Account Type: {account.account_type}")
+            print()
+
+    def withdrawal(self, account_index, amount):
+        account = self.accounts[account_index]
+        if account.balance >= amount:
+            account.balance -= amount
+            print("Withdrawal successful.")
+        else:
+            print("Insufficient balance.")
+
+class Account:
+    def __init__(self, account_number, balance, account_type):
+        self.account_number = account_number
+        self.balance = balance
+        self.account_type = account_type
+
+class Bank:
+    def __init__(self):
+        self.employees = []
+
+    def add_employee(self, employee):
+        self.employees.append(employee)
+
+    def get_employee_list(self):
+        for employee in self.employees:
+            print(f"First Name: {employee.first_name}")
+            print(f"Last Name: {employee.last_name}")
+            print()
+
+    def run_bank(self):
+        emp1 = Employee("Max", "Villegas")
+        emp2 = Employee("Dylan", "Raya")
+        emp3 = Employee("Samuel", "Villegas")
+        emp1.add_account(3456, 36000, 'B')
+        emp2.add_account(0123, 15000, 'C')
+
+        print("=======================================")
+        print("\t\tWelcome to the Bank")
+        while True:
+            print("What action would you like to perform?")
+            print("1. Log in\n2. View all bank accounts\n3. Exit program")
+            print()
+            opt = int(input())
+            if opt == 1:
+                print("Which user are you?")
+                print("1. Max Villegas\n2. Dylan Raya\n3. Samuel Villegas")
+                opt2 = int(input())
+                while opt2 == 1:
+                    print("What would you like to do?")
+                    print("1. View accounts\n2. Add account\n3. Withdraw money\n4. Log out")
+                    opt3 = int(input())
+                    if opt3 == 1:
+                        emp1.get_account_list()
+                    elif opt3 == 2:
+                        emp1.add_account()
+                    elif opt3 == 3:
+                        emp1.get_account_list()
+                        print("From which account would you like to withdraw?")
+                        index = int(input())
+                        print("How much would you like to withdraw?")
+                        wd = float(input())
+                        emp1.withdrawal(index, wd)
+                    elif opt3 == 4:
+                        break
+                while opt2 == 2:
+                    print("What would you like to do, Dylan Raya?")
+                    print("1. View accounts\n2. Add account\n3. Withdraw money\n4. Log out")
+                    opt3 = int(input())
+                    if opt3 == 1:
+                        emp2.get_account_list()
+                    elif opt3 == 2:
+                        emp2.add_account()
+                    elif opt3 == 3:
+                        emp2.get_account_list()
+                        print("From which account would you like to withdraw?")
+                        index = int(input())
+                        print("How much would you like to withdraw?")
+                        wd = float(input())
+                        emp2.withdrawal(index, wd)
+                    elif opt3 == 4:
+                        break
+                while opt2 == 3:
+                    print("What would you like to do, Samuel Villegas?")
+                    print("1. View accounts\n2. Add account\n3. Withdraw money\n4. Log out")
+                    opt3 = int(input())
+                    if opt3 == 1:
+                        emp3.get_account_list()
+                    elif opt3 == 2:
+                        emp3.add_account()
+                    elif opt3 == 3:
+                        emp3.get_account_list()
+                        print("From which account would you like to withdraw?")
+                        index = int(input())
+                        print("How much would you like to withdraw?")
+                        wd = float(input())
+                        emp3.withdrawal(index, wd)
+                    elif opt3 == 4:
+                        break
+            elif opt == 2:
+                self.get_employee_list()
+            elif opt == 3:
+                print("\t\tGoodbye!")
+                break
+
+bank = Bank()
+bank.run_bank()
