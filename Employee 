@@ -1,0 +1,95 @@
+import sys
+
+class Employee:
+    def __init__(self, name, lastName):
+        self.name = name
+        self.lastName = lastName
+        self.employeeAccountList = []
+
+    def addAccount(self):
+        acctype = ''
+        while acctype not in ['A', 'B', 'C']:
+            acctype = input("Ingrese el tipo de la cuenta: ")
+            if acctype not in ['A', 'B', 'C']:
+                print("Tipo de cuenta invalido")
+        Noc = int(input("Ingrese el numero de cuenta: "))
+        saldo = float(input("Ingrese la cantidad de dinero inicial: "))
+        newAccount = BankAccount(Noc, saldo, acctype)
+        self.employeeAccountList.append(newAccount)
+        Main.bank.setAccounts(newAccount)
+
+    def addAccount(self, num, Saldo, Acctype):
+        newAccount = BankAccount(num, Saldo, Acctype)
+        self.employeeAccountList.append(newAccount)
+        Main.bank.setAccounts(newAccount)
+
+    def getAccountList(self):
+        s = 0
+        print("***\tCuentas de: " + self.name + " " + self.lastName + "\t***")
+        for bankAccount in self.employeeAccountList:
+            print(" Cuenta " + str(s + 1))
+            print(" Numero de Cuenta: " + str(bankAccount.getNoCuenta()))
+            print("Tipo de Cuenta: " + bankAccount.getAccType())
+            print("Saldo actual:" + str(bankAccount.getSaldo()))
+            s += 1
+        print("************")
+
+    def retiro(self, index, rt):
+        for bankAccount in self.employeeAccountList[index - 1:index]:
+            if bankAccount.getAccType() == 'A' and rt >= 1000:
+                if bankAccount.getSaldo() < rt:
+                    print("La cantidad a retirar excede el saldo actual")
+                else:
+                    BankAccount.DismnSaldo(rt)
+            elif bankAccount.getAccType() == 'B' and rt >= 5000:
+                if bankAccount.getSaldo() < rt:
+                    print("La cantidad a retirar excede el saldo actual")
+                else:
+                    BankAccount.DismnSaldo(rt)
+            elif bankAccount.getAccType() == 'C' and rt >= 10000:
+                if bankAccount.getSaldo() < rt:
+                    print("La cantidad a retirar excede el saldo actual")
+                else:
+                    BankAccount.DismnSaldo(rt)
+            else:
+                print("El retiro no cumple con el minimo requerido para retirar")
+
+class BankAccount:
+    def __init__(self, NoCuenta, saldo, accType):
+        self.NoCuenta = NoCuenta
+        self.saldo = saldo
+        self.accType = accType
+
+    def getNoCuenta(self):
+        return self.NoCuenta
+
+    def getSaldo(self):
+        return self.saldo
+
+    def getAccType(self):
+        return self.accType
+
+    def DismnSaldo(self, amount):
+        self.saldo -= amount
+
+class Main:
+    bank = Bank()
+
+class Bank:
+    def __init__(self):
+        self.accounts = []
+
+    def setAccounts(self, account):
+        self.accounts.append(account)
+
+    def getAccounts(self):
+        return self.accounts
+
+def main():
+    employee = Employee("John", "Doe")
+    employee.addAccount()
+    employee.getAccountList()
+    employee.retiro(1, 500)
+
+if __name__ == "__main__":
+    main()
