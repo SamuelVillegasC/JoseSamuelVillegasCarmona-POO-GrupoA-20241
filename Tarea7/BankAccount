@@ -1,0 +1,51 @@
+public class BankAccount {
+
+   private long NoCuenta;
+   private static double Saldo;
+   private char AccType;
+
+   public BankAccount(long NoCuenta, double Saldo, char AccType) {
+      this.NoCuenta = NoCuenta;
+      this.Saldo =   Saldo;
+      this.AccType = AccType;
+   }
+
+   public long getNoCuenta() {
+      return   NoCuenta;
+   }
+
+   public void setNoCuenta(long NoCuenta) {
+      this.NoCuenta = NoCuenta;
+   }
+
+   public double getSaldo() {
+      return Saldo;
+   }
+
+   public void AumentoSaldo(double Saldo) {
+      if (AccType == 'A' && Saldo < 50000){
+         this.Saldo = Saldo;
+      } else if (AccType == 'B' && Saldo <100000){
+         this.Saldo = Saldo;
+      } else {
+         this.Saldo = Saldo;
+      }
+   }
+
+   public static void DismnSaldo(double rt){
+      Saldo -= rt;
+   }
+
+   public char getAccType() {
+      return AccType;
+   }
+
+   public void setAcctype(char AccType) {
+      if (AccType == 'A' || AccType == 'B' || AccType == 'C') {
+         this.AccType = AccType;
+      } else {
+         System.out.println("Tipo de cuenta invalido");
+      }
+   }
+
+}
