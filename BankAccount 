@@ -1,0 +1,34 @@
+class BankAccount:
+    def __init__(self, NoCuenta, Saldo, AccType):
+        self.NoCuenta = NoCuenta
+        self.Saldo = Saldo
+        self.AccType = AccType
+
+    def getNoCuenta(self):
+        return self.NoCuenta
+
+    def setNoCuenta(self, NoCuenta):
+        self.NoCuenta = NoCuenta
+
+    def getSaldo(self):
+        return self.Saldo
+
+    def AumentoSaldo(self, Saldo):
+        if self.AccType == 'A' and Saldo < 50000:
+            self.Saldo = Saldo
+        elif self.AccType == 'B' and Saldo < 100000:
+            self.Saldo = Saldo
+        else:
+            self.Saldo = Saldo
+
+    def DismnSaldo(self, rt):
+        self.Saldo -= rt
+
+    def getAccType(self):
+        return self.AccType
+
+    def setAcctype(self, AccType):
+        if AccType == 'A' or AccType == 'B' or AccType == 'C':
+            self.AccType = AccType
+        else:
+            print("Invalid account type")
