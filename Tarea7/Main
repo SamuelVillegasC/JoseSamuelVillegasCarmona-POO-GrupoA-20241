@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+public class Main {
+    static Scanner sc = new Scanner(System.in);
+    static Bank bank = new Bank();
+    public static void main(String[] args) {
+        Employee emp1 = new Employee("Max", "Villegas");
+        Employee emp2 = new Employee("Dylan", "Raya");
+        Employee emp3 = new Employee("Samuel", "Villegas");
+        emp1.addAccount(3456,36000,'B');
+        emp2.addAccount(0123,15000,'C');
+
+        System.out.println("=======================================");
+        System.out.println("\t\tBienvenido Banco");
+        while (true) {
+            System.out.println("¿Que accion desea realizar?");
+            System.out.println("/1. Iniciar Sesion \n 2. Ver todas las cuentas de banco \n 3. Cerrar programa ");
+            System.out.println();
+            int opt = sc.nextInt();
+            if (opt == 1){
+                System.out.println("Que usuario es: \n1 Max Villegas \n2 Dylan Raya \n3 Samuel Villegas");
+                int opt2 = sc.nextInt();
+                while (opt2 == 1){
+                    System.out.println("Que desea realizar: \n1 Ver Cuentas \n2 Agregar Cuenta \n3 Retirar Dinero \n4 Cerrar Sesion ");
+                    int opt3 = sc.nextInt();
+                    if (opt3 == 1){
+                        emp1.getAccountList();
+                    } else if (opt3 == 2 ){
+                        emp1.addAccount();
+                    } else if (opt3 == 3){
+                        emp1.getAccountList();
+                        System.out.println("De que cuenta desea retirar?: ");
+                        int index = sc.nextInt();
+                        System.out.println("Cuanto va a retirar: ");
+                        double wd = sc.nextDouble();
+                        emp1.retiro(index,wd);
+                    } else if (opt3 == 4){
+                        break;
+                    }
+                } while (opt2 == 2){
+                    System.out.println("Que desea realizar Dylan Raya: \n1 Ver Cuentas \n2 Agregar Cuenta \n3 Retirar Dinero \n4 Cerrar Sesion ");
+                    int opt3 = sc.nextInt();
+                    if (opt3 == 1){
+                        emp2.getAccountList();
+                    } else if (opt3 == 2 ){
+                        emp2.addAccount();
+                    } else if (opt3 == 3){
+                        emp2.getAccountList();
+                        System.out.println("De que cuenta desea retirar: ");
+                        int index = sc.nextInt();
+                        System.out.println("Cuanto va a retirar: ");
+                        double wd = sc.nextDouble();
+                        emp2.retiro(index,wd);
+                    } else if (opt3 == 4){
+                        break;
+                    }
+                } while (opt2 == 3){
+                    System.out.println("Que desea realizar Samuel Villegas: \n1 Ver Cuentas \n2 Agregar Cuenta \n3 Retirar Dinero \n4 Cerrar Sesion ");
+                    int opt3 = sc.nextInt();
+                    if (opt3 == 1){
+                        emp3.getAccountList();
+                    } else if (opt3 == 2 ){
+                        emp3.addAccount();
+                    } else if (opt3 == 3){
+                        emp3.getAccountList();
+                        System.out.println("De que cuenta desea retirar: ");
+                        int index = sc.nextInt();
+                        System.out.println("Cuanto va a retirar: ");
+                        double wd = sc.nextDouble();
+                        emp3.retiro(index,wd);
+                    } else if (opt3 == 4){
+                        break;
+                    }
+                }
+            } else if (opt == 2){
+                bank.AcclList();
+            }else if (opt == 3){
+                System.out.println("\t\tAdios!");
+                break;
+            }
+
+        }
+    }
+}
