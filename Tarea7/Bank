@@ -1,0 +1,31 @@
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+public class Bank {
+    private ArrayList<BankAccount> accounts = new ArrayList<>();
+
+    public void setAccounts(BankAccount newAccount){
+        this.accounts.add(newAccount);
+    }
+    public void AcclList(){
+    int s=0;
+    for (BankAccount bankAccount: accounts ){
+        System.out.println("Cuenta: "+ (s+1));
+        System.out.println("NoCuenta: "+bankAccount.getNoCuenta());
+        System.out.println("Tipo de Cuenta: "+bankAccount.getAccType());
+        System.out.println("Saldo: "+bankAccount.getSaldo());
+        s++;
+    }
+        System.out.println("----------");
+
+    }
+    public void printIndexList(int i){
+        for (BankAccount bankAccount: accounts.subList(i-1,i-1)){
+
+            System.out.println("Cuenta: "+ (i));
+            System.out.println("NoCuenta: "+bankAccount.getNoCuenta());
+            System.out.println("Tipo de Cuenta: "+bankAccount.getAccType());
+            System.out.println("Saldo: "+bankAccount.getSaldo());
+
+        }
+    }
+}
