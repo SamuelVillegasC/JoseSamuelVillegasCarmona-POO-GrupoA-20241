@@ -1,0 +1,52 @@
+class User:
+    def __init__(self, name, last_name):
+        self.name = name
+        self.last_name = last_name
+        self.bk_rented = []
+        self.has_rented = False
+
+    def rent_book(self, library):
+        i = 1
+        print("\t****LISTA DE LIBROS****")
+        for book in library:
+            print(f"{i}. Libro: {book.get_name()}")
+            print(f"Autor: {book.get_author()}")
+            i += 1
+        index = int(input("Ingresa el numero del libro que deseas rentar: "))
+        if library[index-1].is_rented():
+            print("El libro seleccionado se encuentra rentado")
+            return
+        library[index-1].set_rented(True)
+        library[index-1].set_user(self.name)
+        self.bk_rented.append(library[index-1])
+        self.has_rented = True
+        print(f"{self.name} ha rentado: {library[index-1].get_name()} correctamente")
+
+    def return_book(self, library):
+        if not self.bk_rented:
+            print("Aun no renta libros")
+            return
+        i = 1
+        print("Ingrese el numero del libro que desea devolver:")
+        for index, book in enumerate(self.bk_rented):
+            print(f"ID: {i} | Libro: {book.get_name()} | Autor: {book.get_author()}")
+            i += 1
+        id = int(input())
+        library.get_books()[id-1].set_rented(False)
+        library.get_books()[id-1].set_user("")
+        self.bk_rented.pop(id-1)
+        if not self.bk_rented:
+            self.has_rented = False
+        print(f"Libro devuelto, gracias {library.get_books()[id-1].get_name()}")
+
+    def get_name(self):
+        return self.name
+
+    def get_last_name(self):
+        return self.last_name
+
+    def is_has_rented(self):
+        return self.has_rented
+
+    def get_bk_rented(self):
+        return self.bk_rented
