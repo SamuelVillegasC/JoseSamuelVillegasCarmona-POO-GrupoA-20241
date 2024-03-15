@@ -1,0 +1,26 @@
+```python
+class Books:
+    def __init__(self, name, author, user=None):
+        self.name = name
+        self.author = author
+        self.user = user
+        self.isRented = False
+
+    def get_name(self):
+        return self.name
+
+    def get_author(self):
+        return self.author
+
+    def get_user(self):
+        return self.user
+
+    def set_user(self, user):
+        self.user = user
+
+    def set_rented(self, rented):
+        self.isRented = rented
+
+    def is_rented(self):
+        return self.isRented
+```
