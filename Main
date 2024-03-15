@@ -1,0 +1,171 @@
+class Library:
+    def __init__(self):
+        self.users = []
+        self.books = []
+
+    def getUsers(self):
+        return self.users
+
+    def getBooks(self):
+        return self.books
+
+    def printUsers(self):
+        for user in self.users:
+            print(user.getName())
+
+    def printBooks(self):
+        for book in self.books:
+            print(book.getName())
+
+    def printRentedBooks(self):
+        for book in self.books:
+            if book.isRented():
+                print(book.getName())
+
+    def printUsersWithBooks(self):
+        for user in self.users:
+            if len(user.getBooksRented()) > 0:
+                print(user.getName())
+
+class User:
+    def __init__(self, name, lastName):
+        self.name = name
+        self.lastName = lastName
+        self.booksRented = []
+
+    def getName(self):
+        return self.name
+
+    def getBooksRented(self):
+        return self.booksRented
+
+    def rentBook(self, books):
+        for book in books:
+            if not book.isRented():
+                book.setRented(True)
+                self.booksRented.append(book)
+                print("Book rented successfully")
+                return
+        print("No available books to rent")
+
+    def returnBook(self, library):
+        if len(self.booksRented) > 0:
+            book = self.booksRented.pop()
+            book.setRented(False)
+            print("Book returned successfully")
+        else:
+            print("No books rented")
+
+class Book:
+    def __init__(self, name, author):
+        self.name = name
+        self.author = author
+        self.rented = False
+
+    def getName(self):
+        return self.name
+
+    def getAuthor(self):
+        return self.author
+
+    def isRented(self):
+        return self.rented
+
+    def setRented(self, rented):
+        self.rented = rented
+
+def main():
+    library = Library()
+    user1 = User("Sam", "Villegas")
+    user2 = User("Josue", "Garcia")
+    library.getUsers().append(user1)
+    book1 = Book("Maze Runner", "Dylan Raya")
+    library.getBooks().append(book1)
+    book2 = Book("El Cuervo", "Allan Poe")
+    library.getBooks().append(book2)
+    flag1 = True
+    flag = True
+    print("\t----WELCOME TO THE LIBRARY MENU----\n")
+    while flag1:
+        print("_____________________")
+        print("  Enter the option you want to perform: ")
+        print("\t1. Register User")
+        print("\t2. Register Book")
+        print("\t3. Log In")
+        print("\t4. Lists")
+        print("\t5. Close program")
+        print("________________________\n")
+
+        opt = int(input())
+        if opt == 1:
+            print("Enter the user's name: ")
+            name = input()
+            print("Enter the user's last name: ")
+            lastName = input()
+            user = User(name, lastName)
+            library.getUsers().append(user)
+            print("User " + name + " " + lastName + " has been registered successfully")
+        elif opt == 2:
+            print("Enter the book's name: ")
+            bookName = input()
+            print("Enter the book's author: ")
+            author = input()
+            book = Book(bookName, author)
+            library.getBooks().append(book)
+        elif opt == 3:
+            library.printUsers()
+            print("Enter your ID to log in: ")
+            logIn = int(input())
+            print("Welcome " + library.getUsers()[logIn-1].getName() + "!")
+            flag = True
+            while flag:
+                print("*********************")
+                print("  What do you want to do: ")
+                print("\t1. View rented books")
+                print("\t2. Rent a book")
+                print("\t3. Return a book")
+                print("\t4. Log out")
+                print("**********************")
+
+                opt2 = int(input())
+
+                if opt2 == 1:
+                    print("*****BOOKS RENTED BY: " + library.getUsers()[logIn-1].getName() + "*****")
+                    for book in library.getUsers()[logIn-1].getBooksRented():
+                        print("Book: " + book.getName() + " Author: " + book.getAuthor())
+                    print()
+                elif opt2 == 2:
+                    library.getUsers()[logIn-1].rentBook(library.getBooks())
+                elif opt2 == 3:
+                    library.getUsers()[logIn-1].returnBook(library)
+                elif opt2 == 4:
+                    flag = False
+                else:
+                    print("Enter a listed option")
+        elif opt == 4:
+            print("Which list do you want to see: ")
+            print("1. List of books")
+            print("2. List of users")
+            print("3. List of rented books")
+            print("4. List of users who have rented")
+
+            opt2 = int(input())
+
+            if opt2 == 1:
+                library.printBooks()
+            elif opt2 == 2:
+                library.printUsers()
+            elif opt2 == 3:
+                library.printRentedBooks()
+            elif opt2 == 4:
+                library.printUsersWithBooks()
+            else:
+                print("Enter a correct option")
+        elif opt == 5:
+            print("Thank you for your preference, Goodbye!")
+            flag1 = False
+        else:
+            print("Enter a correct option!\n")
+
+if __name__ == "__main__":
+    main()
