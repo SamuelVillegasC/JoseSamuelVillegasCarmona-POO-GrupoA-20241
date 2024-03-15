@@ -1,0 +1,97 @@
+```python
+class Library:
+    def __init__(self):
+        self.users = []
+        self.books = []
+
+    def print_users(self):
+        if not self.users:
+            print("Aun no se registran usuarios")
+            return
+
+        print("\t****LISTA DE USUARIOS****")
+        for i, user in enumerate(self.users, start=1):
+            has_rented = "Si" if user.has_rented else "No"
+            print(f"ID: {i}")
+            print(f"Nombre: {user.name} {user.last_name}")
+            print(f"Ha rentado: {has_rented}")
+        print()
+
+    def print_books(self):
+        if not self.books:
+            print("Sin libros registrados")
+            return
+
+        print("\t****LISTA DE LIBROS****")
+        for i, book in enumerate(self.books, start=1):
+            is_rented = "Si" if book.is_rented else "No"
+            print(f"{i}. Libro: {book.name}")
+            print(f" Autor: {book.author}")
+            print(f" Esta rentado: {is_rented}")
+        print()
+
+    def print_rented_books(self):
+        rented_books = [book for book in self.books if book.is_rented]
+        if not rented_books:
+            print("No hay libros rentados")
+            return
+
+        print("\t****LISTA DE LIBROS RENTADOS****")
+        for i, book in enumerate(rented_books, start=1):
+            print(f"{i}. Libro: {book.name}")
+            print(f" Autor: {book.author}")
+            print(f"Rentado por: {book.user}")
+        print()
+
+    def print_users_with_books(self):
+        users_with_books = [user for user in self.users if user.has_rented]
+        if not users_with_books:
+            print("Ningun usuarios tiene libros")
+            return
+
+        print("\t*****LISTA DE USUARIOS QUE HAN RENTADO*****")
+        for i, user in enumerate(users_with_books, start=1):
+            print(f"{i}. Nombre: {user.name} {user.last_name}")
+            print(f"\tLibros que ha rentado {user.name}:")
+            for book in user.books_rented:
+                print(f"\t\tLibro: {book.name} | Autor: {book.author}")
+        print()
+
+    def get_users(self):
+        return self.users
+
+    def get_books(self):
+        return self.books
+
+
+class User:
+    def __init__(self, name, last_name):
+        self.name = name
+        self.last_name = last_name
+        self.has_rented = False
+        self.books_rented = []
+
+    def rent_book(self, book):
+        self.has_rented = True
+        self.books_rented.append(book)
+
+    def return_book(self, book):
+        self.has_rented = False
+        self.books_rented.remove(book)
+
+
+class Book:
+    def __init__(self, name, author):
+        self.name = name
+        self.author = author
+        self.is_rented = False
+        self.user = None
+
+    def rent(self, user):
+        self.is_rented = True
+        self.user = user
+
+    def return_book(self):
+        self.is_rented = False
+        self.user = None
+```
